@@ -17,5 +17,15 @@ Welcome to my GitHub profile! I recently graduated with a Bachelor's Degree in A
 * **Tools:** Git, Jupyter Notebook, Docker, Jenkins, SonarQube
 
 ### 📊 Featured Projects
-*(You can pin your best repositories directly to your profile, but you can also list them here once you create them)*
-* 🚧 **[Project Name]** - [Brief description of what it does and the tools used].
+🚧 **Multimodal Deep Learning for Multiple Sclerosis Detection (Degree Thesis)**
+
+* **Note:** The code and dataset are confidential due to medical privacy regulations.
+* **Objective:** Developed an automated deep learning system to detect Multiple Sclerosis (MS) in its early stages using non-invasive retinal images (OCT and OCTA).
+* **Role:** Lead developer & researcher for my Final Degree Project (TFG).
+* **Key Achievements & Methodology:**
+  * **Deep Feature Extraction:** Employed Transfer Learning using frozen pre-trained CNNs (like **EfficientNet-B0** and **ResNet-50**) to extract deep features from structurally and vascularly complex 3D image volumes.
+  * **Multimodal Fusion:** Designed and evaluated "late" and "intermediate" feature fusion strategies to successfully combine structural (OCT) and microvascular (OCTA) data, capturing a more complete neurovascular signature of the disease.
+  * **Feature Selection:** Implemented an Extra Trees algorithm to select the most relevant features and mitigate overfitting in high-dimensional fused spaces (over 400,000 components).
+  * **Classification & Validation:** Evaluated combinations using classical classifiers (**SVM**, **Random Forest**, **Logistic Regression**). Implemented a rigorous **Stratified Group K-Fold cross-validation** technique, grouped by patient, to strictly prevent data leakage.
+* **Results:** The best configuration (late fusion with feature selection) achieved an outstanding **F1-Score of 0.985** and a **specificity of 0.950**, demonstrating the immense potential of multimodal deep learning as a clinical biomarker for MS.
+* **Technologies:** Python, PyTorch, Scikit-Learn, Transfer Learning (EfficientNet-B0, ResNet-50), Medical Image Processing.
