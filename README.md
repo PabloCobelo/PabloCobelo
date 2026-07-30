@@ -29,15 +29,13 @@ Welcome to my GitHub profile! I recently graduated with a Bachelor's Degree in A
   * **Documented limits:** the README states what the app does *not* handle — multi-page PDFs, mixed-currency totals, ephemeral storage on free hosting — instead of hiding it.
 * **Technologies:** Python 3.12, Streamlit, Google Gemini, LangGraph, Pydantic v2, pandas, SQLite, pytest, GitHub Actions.
 
-🚧 **Multimodal Deep Learning for Multiple Sclerosis Detection (Degree Thesis)**
+🎓 **Multimodal Deep Learning for Multiple Sclerosis Detection (Degree Thesis)**
 
 * **Note:** The code and dataset are confidential due to medical privacy regulations.
-* **Objective:** Developed an automated deep learning system to detect Multiple Sclerosis (MS) in its early stages using non-invasive retinal images (OCT and OCTA).
-* **Role:** Lead developer & researcher for my Final Degree Project (TFG).
-* **Key Achievements & Methodology:**
-  * **Deep Feature Extraction:** Employed Transfer Learning using frozen pre-trained CNNs (like **EfficientNet-B0** and **ResNet-50**) to extract deep features from structurally and vascularly complex 3D image volumes.
-  * **Multimodal Fusion:** Designed and evaluated "late" and "intermediate" feature fusion strategies to successfully combine structural (OCT) and microvascular (OCTA) data, capturing a more complete neurovascular signature of the disease.
-  * **Feature Selection:** Implemented an Extra Trees algorithm to select the most relevant features and mitigate overfitting in high-dimensional fused spaces (over 400,000 components).
-  * **Classification & Validation:** Evaluated combinations using classical classifiers (**SVM**, **Random Forest**, **Logistic Regression**). Implemented a rigorous **Stratified Group K-Fold cross-validation** technique, grouped by patient, to strictly prevent data leakage.
-* **Results:** The best configuration (late fusion with feature selection) achieved an outstanding **F1-Score of 0.985** and a **specificity of 0.950**, demonstrating the immense potential of multimodal deep learning as a clinical biomarker for MS.
-* **Technologies:** Python, PyTorch, Scikit-Learn, Transfer Learning (EfficientNet-B0, ResNet-50), Medical Image Processing.
+* **Objective:** Detect Multiple Sclerosis from non-invasive retinal imaging by fusing deep features across four OCT and OCTA modalities. The retina is a directly observable extension of the central nervous system: OCT captures the structural thinning caused by axonal damage, OCTA the microvascular changes that often precede it.
+* **Role:** Lead developer & researcher for my Final Degree Project (TFG), on a clinical cohort of **52 patients / 103 eyes** (61 MS, 42 controls) from Hospital General Universitario Gregorio Marañón.
+* **Approach:** Compared end-to-end fine-tuning against frozen feature extraction (**EfficientNet-B0**, **ResNet-50**, and the **RETFound** retinal foundation model), Extra Trees feature selection over a >400,000-component fused space, and early/intermediate/late fusion schemes — **64 experimental configurations** in total. Every one was evaluated with **stratified cross-validation grouped by patient**, so no patient's eyes could ever appear in both training and test: with a cohort this size, that grouping is the difference between a real result and an inflated one.
+* **Results:** Late fusion of all four modalities with feature selection reached **F1 0.985, sensitivity 1.000, specificity 0.950**, against **F1 0.951** for the strongest single modality (fine-tuned macular OCT). Fusing the two OCTA projections with each other did *not* beat the best OCTA model alone — their errors are correlated — while crossing structural with vascular data did. That asymmetry is the actual evidence for neurovascular synergy, rather than the headline score.
+* **What the negative result taught me:** RETFound, pre-trained on retinal images, behaved anomalously until I traced the cause to the quality of the extracted representations rather than to the classifier. A foundation model used outside its original data domain cannot be assumed valid without explicitly verifying its representations first — a check that belongs *before* deployment, not after an odd metric shows up.
+* **Limitations:** with 103 eyes the test folds are small, so these scores carry real variance (up to ±0.10 on specificity) and need a larger cohort to confirm. The OCTA modalities in particular were unstable in isolation.
+* **Technologies:** Python, PyTorch, Scikit-Learn, Transfer Learning (EfficientNet-B0, ResNet-50, RETFound), Medical Image Processing.
