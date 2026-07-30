@@ -7,16 +7,28 @@ Welcome to my GitHub profile! I recently graduated with a Bachelor's Degree in A
 ### 👨‍💻 About Me
 * 🎓 **Education:** BSc in Artificial Intelligence (2022 - 2026).
 * 💼 **Experience:** Previously worked as an AI Intern at Plexus Tech, where I focused on data preprocessing, exploratory data analysis (EDA), and predictive modeling.
-* 🌱 **Currently learning:** Deploying machine learning models / Computer Vision / NLP/ Agentic shopping.
+* 🌱 **Currently learning:** Deploying machine learning models / Computer Vision / NLP / Agentic systems.
 * 🚀 **Looking for:** A full-time position as a Junior AI Engineer or Data Scientist.
-* 📫 **Let's connect:** [pdcobelo@gmail.com](mailto:pdcobelo@gmail.com) | [LinkedIn](www.linkedin.com/in/pablo-cobelo-459b3226a)
+* 📫 **Let's connect:** [pdcobelo@gmail.com](mailto:pdcobelo@gmail.com) | [LinkedIn](https://www.linkedin.com/in/pablo-cobelo-459b3226a)
 
 ### 🛠️ Technical Skills
-* **Programming Languages:** Python, SQL 
-* **Libraries & Frameworks:** Pandas, NumPy, Scikit-Learn, [Añade otras como TensorFlow o PyTorch]
-* **Tools:** Git, Jupyter Notebook, Docker, Jenkins, SonarQube
+* **Programming Languages:** Python, SQL
+* **Libraries & Frameworks:** Pandas, NumPy, Scikit-Learn, PyTorch, Pydantic, LangGraph, Streamlit
+* **Tools:** Git, GitHub Actions, Jupyter Notebook, Docker, Jenkins, SonarQube
 
 ### 📊 Featured Projects
+
+🧾 **[Invoice Insights](https://github.com/PabloCobelo/invoice-insights)** — ▶ **[try the live demo](https://monolitoapp-8ymk5tkzw4bet2uvxq3ir5.streamlit.app/)**
+
+* **What it is:** An end-to-end invoice processing app. Upload a PDF or a photo, a vision LLM extracts the fields, business rules validate them, a human reviews and corrects anything wrong, and the result lands in SQLite. A LangGraph agent then writes an executive spend report over the whole database.
+* **Try it without an API key:** press **Load sample data** to explore 15 synthetic invoices, the spend and vendor charts, the anomaly detection, and a pre-generated agent report.
+* **Design decisions worth a look:**
+  * **Structured output instead of prompt parsing:** Gemini is called with a Pydantic model as its `response_schema`, so the response is valid JSON by construction and there is no fragile text parsing to maintain.
+  * **An agent that cannot invent figures:** the report agent is a linear LangGraph `planner → tools → writer` costing exactly two LLM calls. Every number is computed by pandas; the writer only ever sees aggregate summaries and rendered tool output, never the raw rows. A test fails if raw data leaks into a prompt.
+  * **Testable without spending API quota:** the LLM client is injected rather than constructed inside the nodes, so all 74 tests are deterministic and make zero API calls. CI runs the full suite on every push without needing a key.
+  * **Documented limits:** the README states what the app does *not* handle — multi-page PDFs, mixed-currency totals, ephemeral storage on free hosting — instead of hiding it.
+* **Technologies:** Python 3.12, Streamlit, Google Gemini, LangGraph, Pydantic v2, pandas, SQLite, pytest, GitHub Actions.
+
 🚧 **Multimodal Deep Learning for Multiple Sclerosis Detection (Degree Thesis)**
 
 * **Note:** The code and dataset are confidential due to medical privacy regulations.
